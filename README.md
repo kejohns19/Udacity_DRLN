@@ -55,3 +55,8 @@ Then, place the file in the ```p1_navigation/``` folder in the DRLND GitHub repo
 (For Windows users) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
 (For AWS) If you'd like to train the agent on AWS (and have not enabled a virtual screen), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the "headless" version of the environment. You will not be able to watch the agent without enabling a virtual screen, but you will be able to train the agent. (To watch the agent, you should follow the instructions to enable a virtual screen, and then download the environment for the Linux operating system above.)
+
+## Step 3: Copy DQN model
+Navigate to the ```p1_navigation/``` folder on your local copy of the DRLND GitHub repository.  Download (and replace as necessary) the following files: ```Navigation.ipynb```, ```dqn_agent.py```, ```model.py```.  You should be able to run the DQN learning agent with the finished model saved as checkpoint.pth.  You can also download ```dqn_agent_double.py``` and modify the Navigation jupyter notebook file to run a Double DQN learning model.
+
+The wiki to this repository provides a summary report of building and running the DQN and Double DQN models with various hyperparameters.
