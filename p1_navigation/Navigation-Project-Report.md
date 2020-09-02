@@ -1,3 +1,5 @@
+# Learning Algorithm
+
 I started with the DQN model that we created earlier in the course.  This is comprised of ```dqn_agent.py``` and a ```model.py``` file.  I started with the default hyperparameters as below:
 ```
 BUFFER_SIZE = int(1e5)  # replay buffer size
@@ -112,7 +114,9 @@ def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.99
     return scores
 ```
 
-The function runs until it achieves an average score of 13 over the previous 100 episodes or reaches the maximum number episodes.  I varied several parameters but in general it took between 400-500 episodes to achieve an average score over 13.  
+The function runs until it achieves an average score of 13 over the previous 100 episodes or reaches the maximum number episodes.  I varied several parameters but in general it took between 400-500 episodes to achieve an average score over 13.
+
+# Plot of Rewards
 
 The below output and plot uses default hyperparameters:
 
@@ -127,6 +131,8 @@ Environment solved in 472 episodes!	Average Score: 13.00
 ```
 ![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/learning_rate_mse_dqn.png?raw=true)
 
+# Updates to Model Hyperparameters and impact on learning rate
+
 Changing batch size from 64 to 32 had a positive affect on episodes to solve - reducing by approximately 100 episodes:
 ```
 Episode 100	Average Score: 0.90
@@ -137,6 +143,8 @@ Episode 465	Average Score: 13.00
 Environment solved in 365 episodes!	Average Score: 13.00
 ```
 ![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/learning_rate_mse_dqn_bs32.png?raw=true)
+
+# Substituting loss function and impact on learning rate
 
 Using Smoothed L1 loss instead of MSE ```loss = F.smooth_l1_loss(Q_expected, Q_targets)``` but moving back to a batch size of 64 also similarly reduced the episodes needed to solve:
 ```
@@ -149,6 +157,8 @@ Episode 502	Average Score: 13.13
 Environment solved in 402 episodes!	Average Score: 13.13
 ```
 ![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/learning_rate_mse_dqn_smoothed_L1.png?raw=true)
+
+# Implementing Double DQN and impact on learning rate
 
 I updated the DQN agent to Double DQN Learning by inserting the following code in the learn function for the agent:
 ```python
@@ -178,3 +188,7 @@ Episode 400	Average Score: 10.10
 Episode 481	Average Score: 13.05
 Environment solved in 381 episodes!	Average Score: 13.05
 ```
+
+# Ideas for Future Work
+
+Additional improvement can be acheived by continued iteration on hyperparameters like batch size and exploring additional loss functions.  I could also investigate a more agreesive learning rate for soft update factor (TAU).  Furthermore one could explore updating the model after every frame instead of after every two frames as I chose.  
