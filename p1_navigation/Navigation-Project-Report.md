@@ -131,7 +131,7 @@ Environment solved in 472 episodes!	Average Score: 13.00
 ```
 ![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/learning_rate_mse_dqn.png?raw=true)
 
-# Updates to Model Hyperparameters and impact on learning rate
+# Updates to model hyperparameters and impact on learning rate
 
 Changing batch size from 64 to 32 had a positive affect on episodes to solve - reducing by approximately 100 episodes:
 ```
@@ -191,4 +191,4 @@ Environment solved in 381 episodes!	Average Score: 13.05
 
 # Ideas for Future Work
 
-Additional improvement can be acheived by continued iteration on hyperparameters like batch size and exploring additional loss functions.  I could also investigate a more agreesive learning rate for soft update factor (TAU).  Furthermore one could explore updating the model after every frame instead of after every two frames as I chose.  
+Additional improvement can be acheived by continued iteration on hyperparameters like batch size and exploring additional loss functions.  One could also investigate a more agreesive learning rate for soft update factor (TAU).  Furthermore one could explore updating the model after every frame instead of after every two frames as I chose.  
