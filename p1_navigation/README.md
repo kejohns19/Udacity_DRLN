@@ -5,7 +5,7 @@
 # Navigation Project using DQN learning
 Built as part of the Udacity Deep Reinforcement Learning Nanodegree
 
-# The Environment
+# Project Details
 
 For this project, I will train an agent to navigate and collect yellow bananas in a large, square world.
 
@@ -21,6 +21,8 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 * `3` - turn right.
 
 The task is episodic, and in order to solve the environment, the agent must get an average score of +13 over 100 consecutive episodes.
+
+# Getting Started
 
 ## Step 1: Install Dependencies
 
@@ -73,7 +75,8 @@ Then, place the file in the ```p1_navigation/``` folder in the DRLND GitHub repo
 
 (For AWS) If you'd like to train the agent on AWS (and have not enabled a virtual screen), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the "headless" version of the environment. You will not be able to watch the agent without enabling a virtual screen, but you will be able to train the agent. (To watch the agent, you should follow the instructions to enable a virtual screen, and then download the environment for the Linux operating system above.)
 
-## Step 3: Copy DQN model
+# Instructions
+
 Navigate to the ```p1_navigation/``` folder on your local copy of the DRLND GitHub repository.  Download (and replace as necessary) the following files: ```Navigation.ipynb```, ```dqn_agent.py```, ```model.py```.  You should be able to run the DQN learning agent with the finished model saved as checkpoint.pth.  You can also download ```dqn_agent_double.py``` and modify the Navigation jupyter notebook file to run a Double DQN learning model.
 
-The wiki to this repository provides a summary report of building and running the DQN and Double DQN models with various hyperparameters.
+The file ```Navigation-Project-Report.md``` as well as the wiki to this repository provides a summary report of building and running the DQN and Double DQN models with various hyperparameters.
