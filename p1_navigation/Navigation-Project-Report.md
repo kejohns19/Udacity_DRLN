@@ -1,6 +1,11 @@
 # Learning Algorithm
 
-I started with the DQN model that we created earlier in the course.  This is comprised of ```dqn_agent.py``` and a ```model.py``` file.  I started with the default hyperparameters as below:
+I started with the DQN model that we created earlier in the course.  In addition to the course materials I consulted the following resources:
+
+ - [Pytorch Reinforcement Learning (DQN) Tutorial](https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html)
+ - [Unnat Singh's GitHub Gist for Double DQN implementation](https://gist.github.com/unnat5/b67120ca35e4f21bd3e482cae0ab714b)
+
+The learning agent is comprised of two python files - ```dqn_agent.py``` and a ```model.py``` file.  I started with the default hyperparameters as below:
 ```
 BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 64         # minibatch size
