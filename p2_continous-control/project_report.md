@@ -52,7 +52,7 @@ Below is a plot of the rewards over episodes for the A2C network model with a st
 
 ![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/reward_plot_1.png?raw=true)
 
-The model required 159 episodes to achieve an average score above 30 for 100 consecutive episodes.  
+The model required 159 episodes to achieve an average score above 30 for 100 consecutive episodes.  The last 45 episodes averaged a reward of approximately 38.
 
 ## Ideas for Future Work
 Below are some ideas for future work.
