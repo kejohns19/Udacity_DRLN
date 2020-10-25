@@ -30,4 +30,12 @@ Below is the SAC algorithm pseudocode.  Reference #1 is an excellent overview of
 
 ![](https://raw.githubusercontent.com/kejohns19/Udacity_DRLN/master/images/SAC%20algo%20pseudocode.svg)
 
-I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for example I had to replace nn.Identity with nn.Sequential).  I then modified the code to initiate multiple agents.  
+I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for example I had to replace nn.Identity with nn.Sequential).  I then modified the code to initiate multiple agents.
+
+### Neural network architecture
+
+I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, Linear containing 256 nodes followed by a ReLU activation function. The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution. 
+
+The critic again used the first two fully connected layers from the actor and then included a final fully connected layer to output a single value. This value was then passed to the learning function as the baseline to calculate the advantage estimator (differnece with thediscounted future rewards generated from the actor policy).
+
+
