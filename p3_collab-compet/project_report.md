@@ -29,3 +29,5 @@ A central feature of SAC is entropy regularization. The policy is trained to max
 Below is the SAC algorithm pseudocode.  Reference #1 is an excellent overview of the algorithm.
 
 ![](https://raw.githubusercontent.com/kejohns19/Udacity_DRLN/master/images/SAC%20algo%20pseudocode.svg)
+
+I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for example I had to replace nn.Identity with nn.Sequential).  I then modified the code to initiate multiple agents.  
