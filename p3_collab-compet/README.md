@@ -54,7 +54,7 @@ If you haven't already, follow the [instructions in the DRLND GitHub repository]
   
 The below instructions describes how to run the code in the repository and to train the agent.
 
-* Run through the Jupyter notebook titled Tennis-SAC.ipby.  The first part of the notebook initializes the environment and enables you the understand how to interact with the environment. The second part of the notebook creates the agent, helper functions, and the learning routine.  There are two training routines:
+* Run through the Jupyter notebook titled `Tennis-SAC.ipbyn`.  The notebook leverages functions stored in the `/SAC` subfolder.  The first part of the notebook initializes the environment and enables you the understand how to interact with the environment. The second part of the notebook creates the agent, helper functions, and the learning routine.  There are two training routines:
   * SAC actor that achieves an average score of 0.5 over 100 continuous episodes
   * SAC actor that achieves an average score of 2.0 over 100 continuous episodes
   
