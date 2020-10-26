@@ -40,10 +40,13 @@ The critic again used the first two fully connected layers from the actor and th
 
 #### Key Hyperparameters
 
-![](https://github.com/kejohns19/Udacity_DRLN/raw/master/images/p3_plot_0.5_target.png)
+Key hyperparameters include:
+
+- xmy
+- dld
 
 ### Reward Plot
 
 Below is a plot of rewards over time to reach the goal of +0.5 reward over 100 consecutive episodes:
 
-
+![](https://github.com/kejohns19/Udacity_DRLN/raw/master/images/p3_plot_0.5_target.png)
