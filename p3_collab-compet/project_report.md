@@ -45,6 +45,7 @@ Key hyperparameters include:
 - Learning rate - 1e-3
 - Reward discount rate (gamma) - 0.995
 - Soft update value (tau) - 0.995
+- Entropy trade-off coeff (alpha) - 0.2
 - Sample batchsize - 128 samples
 - Update after every - 2 episodes
 - Updates per episode - once per step
