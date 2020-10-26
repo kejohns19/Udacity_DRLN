@@ -36,7 +36,19 @@ I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for
 
 I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, two Linear layers containing 512 & 256 nodes each followed by a ReLU activation function. The actor input dim is the observation size for one agent which in this case is 24.  The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution.  The final output is squashed by a Tanh function to ensure actions are within the boundaries (-1, 1).
 
-Both the critics again use the first two fully connected layers as in the actor and then include a final fully connected layer to output a single value.  However the input dim for both critics include the full observation and action space - in this particular case that is 24 observations per agent (2) plus 2 actions per agent (2) which is 52.  
+Both the critics again use the first two fully connected layers as in the actor and then include a final fully connected layer to output a single value.  However the input dim for both critics include the full observation and action space - in this particular case that is 24 observations per agent (2) plus 2 actions per agent (2) which is 52.
+
+The loss functions for the two critic networks are:
+
+![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/eq1.svg)
+
+where the target is given by:
+
+![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/eq2.svg)
+
+To learn the optimal policy the action model is optimized according to:
+
+![](https://github.com/kejohns19/Udacity_DRLN/blob/master/images/eq3.svg)
 
 #### Key Hyperparameters
 
