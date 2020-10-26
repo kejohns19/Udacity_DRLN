@@ -1,6 +1,6 @@
 ## Collaborative Competition Multi Actor Deep Reinforcement Learning
 
-Before diving into the details of the report below are key resources that I consulted
+Before diving into the details of the report below are key resources that I consulted:
 
 ---
 
@@ -34,7 +34,7 @@ I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for
 
 ### Neural network architecture
 
-I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, Linear containing 256 nodes followed by a ReLU activation function. The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution. 
+I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, two Linear layers containing 512 & 256 nodes each followed by a ReLU activation function. The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution. 
 
 The critic again used the first two fully connected layers from the actor and then included a final fully connected layer to output a single value. This value was then passed to the learning function as the baseline to calculate the advantage estimator (differnece with thediscounted future rewards generated from the actor policy).
 
@@ -42,11 +42,44 @@ The critic again used the first two fully connected layers from the actor and th
 
 Key hyperparameters include:
 
-- xmy
-- dld
+- Learning rate - 1e-3
+- Reward discount rate (gamma) - 0.995
+- Soft update value (tau) - 0.995
+- Sample batchsize - 128 samples
+- Update after every - 2 episodes
+- Updates per episode - once per step
 
 ### Reward Plot
 
-Below is a plot of rewards over time to reach the goal of +0.5 reward over 100 consecutive episodes:
+Below is a plot of rewards over time to reach the goal of +0.5 reward over 100 consecutive episodes (taking the maximum over both agents). The algorithm acheived the goal reward ater 1671 episodes.
 
 ![](https://github.com/kejohns19/Udacity_DRLN/raw/master/images/p3_plot_0.5_target.png)
+
+The final model weights are saved in the following file `/model_dir/episode-solved-0.5.pt`.  I further tested the algorithm on ten episodes with a deterministic action space (instead of sampling the action space over a Normal distribution).  I accomplished this by simplying passing back the mu instead of of the sampled distribution using mu nad log_prob.  Below are the scores for both agents for ten consequtive episdoes:
+
+```
+Episode 0	Score 0: 2.60	Score 1: 2.60	Length: 1001
+Episode 1	Score 0: 2.60	Score 1: 2.70	Length: 1001
+Episode 2	Score 0: 2.70	Score 1: 2.60	Length: 1001
+Episode 3	Score 0: 2.60	Score 1: 2.60	Length: 1001
+Episode 4	Score 0: 2.60	Score 1: 2.70	Length: 1001
+Episode 5	Score 0: 2.70	Score 1: 2.60	Length: 1001
+Episode 6	Score 0: 2.60	Score 1: 2.60	Length: 1001
+Episode 7	Score 0: 2.60	Score 1: 2.70	Length: 1001
+Episode 8	Score 0: 2.70	Score 1: 2.60	Length: 1001
+Episode 9	Score 0: 2.60	Score 1: 2.60	Length: 1001
+```
+
+I continued training the algorithms to attempt to acheive a goal of +2.0 reward over 100 consecuttive episodes.  The algorithm acheived the goal reward after a further 121 episodes.  Below is a plot of the full rewards history to acheive the higher level reward.
+
+![](https://github.com/kejohns19/Udacity_DRLN/raw/master/images/p3_plot_2.0_target.png)
+
+The final model weights are saved in the following file `/model_dir/episode-solved-2.0.pt`.
+
+## Ideas for Future Work
+
+The multi-agent SAC algorithm peformed fairly well however it did require some hyperparameter tuning.  Calling the update/learn function too early or too often resulted in model instability.  Understanding the trade-offs and sweet spot in how ofter to traing the model would be beneficial.  It appears this is very much a black art.  For instance I did try to train the algorithm for five times per step instead of one time per step but this appears to slow down training whereas I thought training gains per episode would accelerate.  I
+
+Another idea is to implement a prioritized experience replay buffer.  This may lead to more efficient training and less instability.  I explored this option but in the end acheived good training through trying different hyperparater combinations.  
+
+I also would be interested in implementing a multi-agent PPO approach which should be more robust to hyperparameters tuning (perhaps however by sacrificing some training efficiency).  Understand the trade-offs in training efficienty vs training stability between MASAC and MAPPO would be beneficial.  
