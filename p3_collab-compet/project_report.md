@@ -26,17 +26,17 @@ Soft Actor Critic (SAC) is an algorithm that optimizes a stochastic policy in an
 
 A central feature of SAC is entropy regularization. The policy is trained to maximize a trade-off between expected return and entropy, a measure of randomness in the policy. This has a close connection to the exploration-exploitation trade-off: increasing entropy results in more exploration, which can accelerate learning later on. It can also prevent the policy from prematurely converging to a bad local optimum.
 
-Below is the SAC algorithm pseudocode.  Reference #1 is an excellent overview of the algorithm.
+Below is the SAC algorithm pseudocode.  The Spinning Up SAC overview (reference #1) is an excellent review of the algorithm.  I copied the above two paragrapsh from this review.
 
 ![](https://raw.githubusercontent.com/kejohns19/Udacity_DRLN/master/images/SAC%20algo%20pseudocode.svg)
 
-I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for example I had to replace nn.Identity with nn.Sequential).  I then modified the code to initiate multiple agents.
+I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for example I had to replace nn.Identity with nn.Sequential).  I then modified the code to initiate multiple agents. A key (late) learning during this exercise is to `.clone()` the observation inputs for re-use as inputs for multiple models (in this case critic networks for multiple models).  Before learning about cloning the inputs my model would start to learn but then stop and reverse.  Cloning the inputs creates a copy of the original variable that doesn’t forget the history of ops so to allow gradient flow and avoid errors with inlace ops.
 
 ### Neural network architecture
 
-I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, two Linear layers containing 512 & 256 nodes each followed by a ReLU activation function. The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution. 
+I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, two Linear layers containing 512 & 256 nodes each followed by a ReLU activation function. The actor input dim is the observation size for one agent which in this case is 24.  The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution.  The final output is squashed by a Tanh function to ensure actions are within the boundaries (-1, 1).
 
-The critic again used the first two fully connected layers from the actor and then included a final fully connected layer to output a single value. This value was then passed to the learning function as the baseline to calculate the advantage estimator (differnece with thediscounted future rewards generated from the actor policy).
+Both the critics again use the first two fully connected layers as in the actor and then include a final fully connected layer to output a single value.  However the input dim for both critics include the full observation and action space - in this particular case that is 24 observations per agent (2) plus 2 actions per agent (2) which is 52.  
 
 #### Key Hyperparameters
 
