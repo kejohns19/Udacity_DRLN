@@ -38,4 +38,12 @@ I used an actor and two critic neural networks (per the SAC algorithm). All netw
 
 The critic again used the first two fully connected layers from the actor and then included a final fully connected layer to output a single value. This value was then passed to the learning function as the baseline to calculate the advantage estimator (differnece with thediscounted future rewards generated from the actor policy).
 
+#### Key Hyperparameters
+
+![](https://github.com/kejohns19/Udacity_DRLN/raw/master/images/p3_plot_0.5_target.png)
+
+### Reward Plot
+
+Below is a plot of rewards over time to reach the goal of +0.5 reward over 100 consecutive episodes:
+
 
