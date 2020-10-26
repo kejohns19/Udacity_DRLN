@@ -36,7 +36,7 @@ I updated the Spinning Up codebase to make it compatible with Pytorch 0.4.0 (for
 
 I used an actor and two critic neural networks (per the SAC algorithm). All networks share the the same initial network strucure, two Linear layers containing 512 & 256 nodes each followed by a ReLU activation function. The actor input dim is the observation size for one agent which in this case is 24.  The actor then included two final fully connected layers one which output an average (mu) and the other which output a log_std devitation - each output diminsions corresponded to the action dim for the actor, in this case the action dim was two.  The average and log_std were used to sample specific actions from a Normal distribution.  The final output is squashed by a Tanh function to ensure actions are within the boundaries (-1, 1).
 
-Both the critics again use the first two fully connected layers as in the actor and then include a final fully connected layer to output a single value.  However the input dim for both critics include the full observation and action space - in this particular case that is 24 observations per agent (2) plus 2 actions per agent (2) which is 52.
+Both the critics use the first two fully connected layer architecutre as in the actor and then include a final fully connected layer to output a single value.  However the input dim for both critics include the full observation and action space - in this particular case that is 24 observations per agent (2) plus 2 actions per agent (2) which is 52.
 
 The loss functions for the two critic networks are:
 
@@ -68,7 +68,7 @@ Below is a plot of rewards over time to reach the goal of +0.5 reward over 100 c
 
 ![](https://github.com/kejohns19/Udacity_DRLN/raw/master/images/p3_plot_0.5_target.png)
 
-The final model weights are saved in the following file `/model_dir/episode-solved-0.5.pt`.  I further tested the algorithm on ten episodes with a deterministic action space (instead of sampling the action space over a Normal distribution).  I accomplished this by simplying passing back the mu instead of of the sampled distribution using mu nad log_prob.  Below are the scores for both agents for ten consequtive episdoes:
+The final model weights are saved in the following file `/model_dir/episode-solved-0.5.pt`.  I further tested the algorithm on ten episodes with a deterministic action space (instead of a stochastic action space sampled over a Normal distribution).  I accomplished this by simplying passing back the mu instead of the sampled distribution using mu and log_prob.  Below are the scores for both agents for ten consequtive episdoes:
 
 ```
 Episode 0	Score 0: 2.60	Score 1: 2.60	Length: 1001
@@ -91,7 +91,7 @@ The final model weights are saved in the following file `/model_dir/episode-solv
 
 ## Ideas for Future Work
 
-The multi-agent SAC algorithm peformed fairly well however it did require some hyperparameter tuning.  Calling the update/learn function too early or too often resulted in model instability.  Understanding the trade-offs and sweet spot in how ofter to traing the model would be beneficial.  It appears this is very much a black art.  For instance I did try to train the algorithm for five times per step instead of one time per step but this appears to slow down training whereas I thought training gains per episode would accelerate.  I
+The multi-agent SAC algorithm peformed fairly well however it did require some hyperparameter tuning.  Calling the update/learn function too early or too often resulted in model instability.  Understanding the trade-offs and sweet spot for how often to train the model would be beneficial.  It appears this is very much a black art.  For instance I tried to train the algorithm for five times per step instead of one time per step but this slowed down training whereas I thought training gains per episode would accelerate.
 
 Another idea is to implement a prioritized experience replay buffer.  This may lead to more efficient training and less instability.  I explored this option but in the end acheived good training through trying different hyperparater combinations.  
 
